@@ -13,9 +13,9 @@
 # Update this, if you use features of a newer version
 fastlane_version "2.20.0"
 
-default_platform :osx
+default_platform :mac
 
-platform :osx do
+platform :mac do
   before_all do
     # ENV["SLACK_URL"] = "https://hooks.slack.com/services/..."
     
@@ -27,7 +27,6 @@ platform :osx do
     gym(output_directory: "./build")
 
     version = sh("git rev-list HEAD --count").chomp
-    title = version
     zip(path: "./build/cmdjira", output_path: "../build/cmdjira-#{version}.zip"
 )
     
@@ -36,10 +35,10 @@ platform :osx do
 
     set_github_release(
       repository_name: "Szaq/cmdjira",
-      name: [version, title].join(" "),
+      name: version,
       tag_name: version,
       description: description,
-      is_draft: true,
+      is_draft: false,
       upload_assets: ["./build/cmdjira-#{version}.zip"]
     )
 
