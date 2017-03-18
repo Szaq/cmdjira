@@ -12,9 +12,11 @@ struct ShowCommentsCommand: Command {
 
     let command = "comments"
 
+    var subcommands: [Command] = [AddCommentCommand()]
+
     var argumentVariants: [ArgumentsVariantType] = [
         ArgumentsVariant(arguments: [IssueParser("IssueKey")],
-                         description: "Show comments from specfied issue.",
+                         description: "Show comments from specified issue.",
                          map: {return $0[0].value() as String?}),
         ArgumentsVariant(arguments: [],
                          description: "Show comments from issue queried previously.",

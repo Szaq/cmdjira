@@ -8,13 +8,19 @@
 
 /* Begin PBXBuildFile section */
 		204D8ED61E737704001E07B2 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 204D8ED51E737704001E07B2 /* main.swift */; };
-		204D8EDD1E7377AB001E07B2 /* Requests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 204D8EDC1E7377AB001E07B2 /* Requests.swift */; };
+		204D8EDD1E7377AB001E07B2 /* ProfileRequests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 204D8EDC1E7377AB001E07B2 /* ProfileRequests.swift */; };
 		204D8EE21E7382F3001E07B2 /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 204D8EE11E7382F3001E07B2 /* SwiftyJSON.swift */; };
 		204D8EE41E7383B0001E07B2 /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = 204D8EE31E7383B0001E07B2 /* Result.swift */; };
 		204D8EE61E73F3F6001E07B2 /* Promise.swift in Sources */ = {isa = PBXBuildFile; fileRef = 204D8EE51E73F3F6001E07B2 /* Promise.swift */; };
 		204D8EE81E73F64B001E07B2 /* CmdJIRAErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 204D8EE71E73F64B001E07B2 /* CmdJIRAErrors.swift */; };
 		204D8EEB1E74070C001E07B2 /* DisposeBag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 204D8EEA1E74070C001E07B2 /* DisposeBag.swift */; };
 		204D8EEE1E752ABC001E07B2 /* CommandLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 204D8EED1E752ABC001E07B2 /* CommandLine.swift */; };
+		206FF7121E7D7D230063A775 /* AddComment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 206FF7111E7D7D230063A775 /* AddComment.swift */; };
+		206FF7151E7D8EED0063A775 /* BaseRequests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 206FF7141E7D8EED0063A775 /* BaseRequests.swift */; };
+		206FF7171E7D8F150063A775 /* IssuesRequests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 206FF7161E7D8F150063A775 /* IssuesRequests.swift */; };
+		206FF7191E7D8F2B0063A775 /* ProjectsRequests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 206FF7181E7D8F2B0063A775 /* ProjectsRequests.swift */; };
+		206FF71B1E7D8F450063A775 /* WorklogRequests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 206FF71A1E7D8F450063A775 /* WorklogRequests.swift */; };
+		206FF71D1E7D8F600063A775 /* CommentsRequests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 206FF71C1E7D8F600063A775 /* CommentsRequests.swift */; };
 		2071A9631E77363400B40444 /* Date+FormatingAndParsing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2071A9621E77363400B40444 /* Date+FormatingAndParsing.swift */; };
 		2071A9651E773A5A00B40444 /* AddWorklog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2071A9641E773A5A00B40444 /* AddWorklog.swift */; };
 		2071A9671E774A7E00B40444 /* GetMyself.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2071A9661E774A7E00B40444 /* GetMyself.swift */; };
@@ -87,13 +93,19 @@
 /* Begin PBXFileReference section */
 		204D8ED21E737704001E07B2 /* cmdjira */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = cmdjira; sourceTree = BUILT_PRODUCTS_DIR; };
 		204D8ED51E737704001E07B2 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
-		204D8EDC1E7377AB001E07B2 /* Requests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Requests.swift; sourceTree = "<group>"; };
+		204D8EDC1E7377AB001E07B2 /* ProfileRequests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileRequests.swift; sourceTree = "<group>"; };
 		204D8EE11E7382F3001E07B2 /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyJSON.swift; sourceTree = "<group>"; };
 		204D8EE31E7383B0001E07B2 /* Result.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Result.swift; sourceTree = "<group>"; };
 		204D8EE51E73F3F6001E07B2 /* Promise.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Promise.swift; sourceTree = "<group>"; };
 		204D8EE71E73F64B001E07B2 /* CmdJIRAErrors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CmdJIRAErrors.swift; sourceTree = "<group>"; };
 		204D8EEA1E74070C001E07B2 /* DisposeBag.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DisposeBag.swift; sourceTree = "<group>"; };
 		204D8EED1E752ABC001E07B2 /* CommandLine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommandLine.swift; sourceTree = "<group>"; };
+		206FF7111E7D7D230063A775 /* AddComment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddComment.swift; sourceTree = "<group>"; };
+		206FF7141E7D8EED0063A775 /* BaseRequests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseRequests.swift; sourceTree = "<group>"; };
+		206FF7161E7D8F150063A775 /* IssuesRequests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IssuesRequests.swift; sourceTree = "<group>"; };
+		206FF7181E7D8F2B0063A775 /* ProjectsRequests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectsRequests.swift; sourceTree = "<group>"; };
+		206FF71A1E7D8F450063A775 /* WorklogRequests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorklogRequests.swift; sourceTree = "<group>"; };
+		206FF71C1E7D8F600063A775 /* CommentsRequests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentsRequests.swift; sourceTree = "<group>"; };
 		2071A9621E77363400B40444 /* Date+FormatingAndParsing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Date+FormatingAndParsing.swift"; sourceTree = "<group>"; };
 		2071A9641E773A5A00B40444 /* AddWorklog.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddWorklog.swift; sourceTree = "<group>"; };
 		2071A9661E774A7E00B40444 /* GetMyself.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetMyself.swift; sourceTree = "<group>"; };
@@ -181,6 +193,7 @@
 		204D8ED41E737704001E07B2 /* cmdjira */ = {
 			isa = PBXGroup;
 			children = (
+				206FF7131E7D8EE00063A775 /* Requests */,
 				208A00251E7AD6760065EDB6 /* Utils */,
 				2071A9A01E79DE1C00B40444 /* ArgumentParsers */,
 				2071A9991E79ACB900B40444 /* CompletionProviders */,
@@ -190,7 +203,6 @@
 				204D8EE91E7406FE001E07B2 /* Promise */,
 				204D8EE01E7382E6001E07B2 /* vendor */,
 				204D8ED51E737704001E07B2 /* main.swift */,
-				204D8EDC1E7377AB001E07B2 /* Requests.swift */,
 				204D8EE71E73F64B001E07B2 /* CmdJIRAErrors.swift */,
 				20CBB9451E7533E000284540 /* ParseCommandLine.swift */,
 				2071A98B1E7807C900B40444 /* CommandExecuter.swift */,
@@ -226,6 +238,68 @@
 				20CBB9391E752B5A00284540 /* StringExtensions.swift */,
 			);
 			name = CommanLineKit;
+			sourceTree = "<group>";
+		};
+		206FF70C1E7D7CBC0063A775 /* Comments */ = {
+			isa = PBXGroup;
+			children = (
+				20CBB94B1E7558D200284540 /* ShowComments.swift */,
+				206FF7111E7D7D230063A775 /* AddComment.swift */,
+			);
+			name = Comments;
+			sourceTree = "<group>";
+		};
+		206FF70D1E7D7CC10063A775 /* Tracking */ = {
+			isa = PBXGroup;
+			children = (
+				208A00651E7C151B0065EDB6 /* ChangeTrackingTime.swift */,
+				2071A98D1E79312900B40444 /* ShowTrackingStatus.swift */,
+				2071A9911E79625A00B40444 /* StartTrackingCommand.swift */,
+				2071A9931E79626B00B40444 /* StopTrackingCommand.swift */,
+			);
+			name = Tracking;
+			sourceTree = "<group>";
+		};
+		206FF70E1E7D7CC60063A775 /* Worklogs */ = {
+			isa = PBXGroup;
+			children = (
+				20CBB9521E75765E00284540 /* ListWorklogs.swift */,
+				2071A9641E773A5A00B40444 /* AddWorklog.swift */,
+			);
+			name = Worklogs;
+			sourceTree = "<group>";
+		};
+		206FF70F1E7D7CD30063A775 /* Users */ = {
+			isa = PBXGroup;
+			children = (
+				2071A9791E775EB100B40444 /* SelectUser.swift */,
+				2071A9731E7755C000B40444 /* Login.swift */,
+				2071A9751E7759C600B40444 /* ListUsers.swift */,
+				2071A9771E775A3900B40444 /* Logout.swift */,
+			);
+			name = Users;
+			sourceTree = "<group>";
+		};
+		206FF7101E7D7CE90063A775 /* Issues */ = {
+			isa = PBXGroup;
+			children = (
+				20CBB93C1E752CA000284540 /* ShowIssue.swift */,
+				20CBB9491E75535F00284540 /* ListIssues.swift */,
+			);
+			name = Issues;
+			sourceTree = "<group>";
+		};
+		206FF7131E7D8EE00063A775 /* Requests */ = {
+			isa = PBXGroup;
+			children = (
+				206FF7141E7D8EED0063A775 /* BaseRequests.swift */,
+				204D8EDC1E7377AB001E07B2 /* ProfileRequests.swift */,
+				206FF7161E7D8F150063A775 /* IssuesRequests.swift */,
+				206FF7181E7D8F2B0063A775 /* ProjectsRequests.swift */,
+				206FF71A1E7D8F450063A775 /* WorklogRequests.swift */,
+				206FF71C1E7D8F600063A775 /* CommentsRequests.swift */,
+			);
+			name = Requests;
 			sourceTree = "<group>";
 		};
 		2071A96A1E77523B00B40444 /* KeychainSwift */ = {
@@ -276,22 +350,14 @@
 		20CBB93B1E752C9200284540 /* Commands */ = {
 			isa = PBXGroup;
 			children = (
-				20CBB93C1E752CA000284540 /* ShowIssue.swift */,
-				20CBB9491E75535F00284540 /* ListIssues.swift */,
-				20CBB94B1E7558D200284540 /* ShowComments.swift */,
-				20CBB9521E75765E00284540 /* ListWorklogs.swift */,
-				2071A9641E773A5A00B40444 /* AddWorklog.swift */,
+				206FF7101E7D7CE90063A775 /* Issues */,
+				206FF70F1E7D7CD30063A775 /* Users */,
+				206FF70E1E7D7CC60063A775 /* Worklogs */,
+				206FF70D1E7D7CC10063A775 /* Tracking */,
+				206FF70C1E7D7CBC0063A775 /* Comments */,
 				2071A9661E774A7E00B40444 /* GetMyself.swift */,
-				2071A9731E7755C000B40444 /* Login.swift */,
-				2071A9751E7759C600B40444 /* ListUsers.swift */,
-				2071A9771E775A3900B40444 /* Logout.swift */,
-				2071A9791E775EB100B40444 /* SelectUser.swift */,
 				2071A97D1E77EDB600B40444 /* ListProjects.swift */,
 				2071A9851E78037B00B40444 /* ShowVersion.swift */,
-				2071A98D1E79312900B40444 /* ShowTrackingStatus.swift */,
-				2071A9911E79625A00B40444 /* StartTrackingCommand.swift */,
-				2071A9931E79626B00B40444 /* StopTrackingCommand.swift */,
-				208A00651E7C151B0065EDB6 /* ChangeTrackingTime.swift */,
 			);
 			name = Commands;
 			sourceTree = "<group>";
@@ -411,7 +477,9 @@
 				2071A9701E7752A900B40444 /* KeychainSwiftConstants.swift in Sources */,
 				20DF97271E79EE3800A01DB8 /* DateSpanParser.swift in Sources */,
 				204D8EE81E73F64B001E07B2 /* CmdJIRAErrors.swift in Sources */,
+				206FF71D1E7D8F600063A775 /* CommentsRequests.swift in Sources */,
 				20CBB93A1E752B5A00284540 /* StringExtensions.swift in Sources */,
+				206FF7121E7D7D230063A775 /* AddComment.swift in Sources */,
 				208A00661E7C151B0065EDB6 /* ChangeTrackingTime.swift in Sources */,
 				2071A97A1E775EB100B40444 /* SelectUser.swift in Sources */,
 				20CBB94A1E75535F00284540 /* ListIssues.swift in Sources */,
@@ -419,10 +487,12 @@
 				2071A9781E775A3900B40444 /* Logout.swift in Sources */,
 				20CBB93D1E752CA000284540 /* ShowIssue.swift in Sources */,
 				2071A97C1E77685800B40444 /* TimeInterval+StringInitialization.swift in Sources */,
+				206FF7191E7D8F2B0063A775 /* ProjectsRequests.swift in Sources */,
 				2071A9721E77534C00B40444 /* User.swift in Sources */,
 				208A00241E7AB8AF0065EDB6 /* Page.swift in Sources */,
 				2071A99F1E79ADA900B40444 /* ProjectsCache.swift in Sources */,
 				208A00211E7AB08F0065EDB6 /* ResultsPage.swift in Sources */,
+				206FF7151E7D8EED0063A775 /* BaseRequests.swift in Sources */,
 				20CBB9481E754AA500284540 /* Issue.swift in Sources */,
 				20CBB94E1E755C2500284540 /* Comment.swift in Sources */,
 				20DF97211E79EDF600A01DB8 /* DateParser.swift in Sources */,
@@ -436,7 +506,7 @@
 				2071A9961E79A0A100B40444 /* IssuesCache.swift in Sources */,
 				20CBB9571E76E8D900284540 /* Worklog.swift in Sources */,
 				2071A9631E77363400B40444 /* Date+FormatingAndParsing.swift in Sources */,
-				204D8EDD1E7377AB001E07B2 /* Requests.swift in Sources */,
+				204D8EDD1E7377AB001E07B2 /* ProfileRequests.swift in Sources */,
 				208A00271E7AD6800065EDB6 /* ANSIColor.swift in Sources */,
 				20CBB94C1E7558D200284540 /* ShowComments.swift in Sources */,
 				204D8EEE1E752ABC001E07B2 /* CommandLine.swift in Sources */,
@@ -452,6 +522,7 @@
 				204D8ED61E737704001E07B2 /* main.swift in Sources */,
 				2071A9901E79574B00B40444 /* Tracking.swift in Sources */,
 				20CBB9511E755CC800284540 /* Date+StringInitialization.swift in Sources */,
+				206FF7171E7D8F150063A775 /* IssuesRequests.swift in Sources */,
 				20CBB9381E752B4100284540 /* Option.swift in Sources */,
 				20DF97231E79EE0C00A01DB8 /* IssueParser.swift in Sources */,
 				204D8EEB1E74070C001E07B2 /* DisposeBag.swift in Sources */,
@@ -462,6 +533,7 @@
 				2071A99D1E79AD7800B40444 /* DateSpanCompletionProvider.swift in Sources */,
 				2071A99B1E79AD4C00B40444 /* DateCompletionProvider.swift in Sources */,
 				2071A9761E7759C600B40444 /* ListUsers.swift in Sources */,
+				206FF71B1E7D8F450063A775 /* WorklogRequests.swift in Sources */,
 				2071A9861E78037B00B40444 /* ShowVersion.swift in Sources */,
 				2071A97E1E77EDB600B40444 /* ListProjects.swift in Sources */,
 				20CBB9461E7533E000284540 /* ParseCommandLine.swift in Sources */,

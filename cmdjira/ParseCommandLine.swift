@@ -20,6 +20,7 @@ enum CommandLineOption {
     case formatPrompt
     case showBashPrompt
     case showZshPrompt
+    case multiline
 
     static var all: [CommandLineOption] = [
         projectID,
@@ -32,7 +33,8 @@ enum CommandLineOption {
         cancel,
         formatPrompt,
         showBashPrompt,
-        showZshPrompt
+        showZshPrompt,
+        multiline
     ]
 }
 
@@ -48,6 +50,7 @@ struct CommandLineOptions {
     let formatPrompt = BoolOption(longFlag: "format-prompt", required: false, helpMessage: "Format tracking data as suitable to display as prompt. See --show-bash-prompt-setter and --show-zsh-prompt-setter")
     let showBashPrompt = BoolOption(longFlag: "show-bash-prompt-setter", required: false, helpMessage: "Show code that needs to be added to ~/.bash_profile in order to display tracking info in BASH promp.")
     let showZshPrompt = BoolOption(longFlag: "show-zsh-prompt-setter", required: false, helpMessage: "Show code that needs to be added to ~/.zshrc in order to display tracking info in ZSH prompt.")
+    let multiline = BoolOption(longFlag: "multiline", required: false, helpMessage: "Text input expects multiple lines followed by line containing single word END.")
 
 
     func option(_ option: CommandLineOption) -> Option {
@@ -63,6 +66,7 @@ struct CommandLineOptions {
         case .formatPrompt: return formatPrompt
         case .showBashPrompt: return showBashPrompt
         case .showZshPrompt: return showZshPrompt
+        case .multiline: return multiline
         }
     }
 
@@ -77,7 +81,8 @@ struct CommandLineOptions {
                 showErrorDetails,
                 formatPrompt,
                 showBashPrompt,
-                showZshPrompt]
+                showZshPrompt,
+                multiline]
     }
 }
 

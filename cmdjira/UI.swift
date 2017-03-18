@@ -36,6 +36,34 @@ class UI {
         print(text.color(.darkGray))
     }
 
+    func printQuestion(_ question: String) {
+        print(question.bold.color(.cyan))
+    }
+
+    func prompt(label: String, multiline: Bool = false) -> String {
+
+        var lines = [String]()
+
+        //Display prompt only if we are not being piped into
+        if isatty(fileno(stdin)) != 0 {
+            printQuestion(label + (multiline ? " Enter line containing single word END to finish.".color(.cyan) : ""))
+            while let line = readLine(), !multiline || line != "END" {
+                lines.append(line)
+
+                if !multiline {
+                    break
+                }
+            }
+
+        } else {
+
+            while let line = readLine() {
+                lines.append(line)
+            }
+        }
+        return lines.joined(separator: "\n")
+    }
+
     func printTable(rows: [[String]]) {
         var maxColLengths: [Int] = []
         for row in rows {
