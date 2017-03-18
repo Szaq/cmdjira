@@ -40,8 +40,8 @@ struct ShowCommentsCommand: Command {
 
     func processPageOfComments(comments: [Comment], context: CommandContext) {
         if !context.options.displayRaw.wasSet {
-            let commentsTable = comments.map {[$0.updated?.pretty ?? "--",
-                                               $0.author,
+            let commentsTable = comments.map {[$0.updated?.pretty.bold.color(.darkGray) ?? "--",
+                                               $0.author.bold.color(.blue),
                                                $0.body]}
             context.ui.printTable(rows: commentsTable)
         } else {

@@ -28,10 +28,10 @@ xcode-select --install
 </tr>
 </table>
 # Available Actions
-## osx
-### osx release
+## Mac
+### mac release
 ```
-fastlane osx release
+fastlane mac release
 ```
 Deploy a new version to the Github
 

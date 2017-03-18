@@ -40,6 +40,10 @@ enum ANSIColor: String {
 
 extension String {
     func color(_ color: ANSIColor) -> String {
-        return color.rawValue + self
+        return color.rawValue + self + ANSIColor.black.rawValue
+    }
+
+    var bold: String {
+        return"\u{001B}[1m\(self)\u{001B}[0m"
     }
 }
