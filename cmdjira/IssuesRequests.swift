@@ -9,14 +9,13 @@
 import Foundation
 
 func searchIssues(query: String,
-                  options: CommandLineOptions,
                   context: CommandContext,
                   page: Page = Page.default) -> Promise<Result<ResultsPage<Issue>>> {
     do {
-        let req = try request(forURL: urlFor(path: "/api/2/search?startAt=\(page.startAt)&maxResults=\(page.maxResults)&jql=\(query)"), context: context)
+        let req = try request(forURL: urlFor(path: "/api/2/search?startAt=\(page.startAt)&maxResults=\(page.maxResults)&jql=\(query.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed) ?? query)"), context: context)
 
         return defaultHTTPGetter(request: req,
-                                 options: options)
+                                 options: context.options)
             .then { result in
                 switch result {
                 case .failure(let error):
@@ -34,7 +33,7 @@ func searchIssues(query: String,
 }
 
 func getIssues(forProject projectID: String, context: CommandContext, page: Page = Page.default) -> Promise<Result<ResultsPage<Issue>>> {
-    return searchIssues(query: "project=\(projectID)", options: context.options, context: context, page: page)
+    return searchIssues(query: "project=\(projectID)", context: context, page: page)
 }
 
 func getIssueRequest(issueID: String, context: CommandContext) -> Promise<Result<JSON>> {

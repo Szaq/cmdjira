@@ -1,40 +1,33 @@
 //
-//  ListIssues.swift
+//  SearchIssuesCommand.swift
 //  cmdjira
 //
-//  Created by Łukasz Kwoska on 12/03/2017.
+//  Created by Łukasz Kwoska on 19/03/2017.
 //  Copyright © 2017 Spinal Development. All rights reserved.
 //
 
 import Foundation
 
-struct ListIssuesCommand: Command {
 
-    let command = "issues"
-    var subcommands: [Command] = [SearchIssuesCommand()]
+struct SearchIssuesCommand: Command {
+
+    let command = "search"
 
     var argumentVariants: [ArgumentsVariantType] = [
-        ArgumentsVariant(arguments: [ProjectParser("ProjectKey")],
-                         description: "List issues in specfied project.",
-                         map: {return $0[0].value() as String?}),
         ArgumentsVariant(arguments: [],
-                         description: "List issues in project queried previously.",
+                         description: "Search issues in JIRA by providing input query interactively or by STDIN.",
                          map: {_ in return nil as String?}),
         ]
 
     func execute(arguments: [String], context: CommandContext) {
 
-        guard let project = parse(arguments: arguments) ?? context.project else {
-            context.ui.printError("Project not specified")
-            context.done()
-            return
-        }
+        let query = context.ui.prompt(label: "Search query:", multiline: context.options.multiline.wasSet)
 
         context.ui.startActivityIndicator()
 
         handlePagedResult(
             context: context,
-            onLoad: { getIssues(forProject: project, context: context, page: $0)},
+            onLoad: { searchIssues(query: query, context: context, page: $0)},
             onPage: { self.processPageOfIssues(issues: $0, context: context)},
             onDone: { context.done() },
             onError: { error in
