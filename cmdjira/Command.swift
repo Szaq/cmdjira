@@ -15,7 +15,7 @@ protocol Command {
     var argumentVariants: [ArgumentsVariantType] {get}
 
     func helpString(forParentCommand: String) -> String
-    func execute(arguments: [String], options: CommandLineOptions, context: CommandContext)
+    func execute(arguments: [String], context: CommandContext)
 }
 
 extension Command {
@@ -32,7 +32,6 @@ extension Command {
 
     ///Calls this command or one of subcommands
     func call(forArguments arguments: [String],
-              options: CommandLineOptions,
               context: CommandContext,
               parentCommands: [Command] = []) {
 
@@ -42,12 +41,11 @@ extension Command {
 
             let subarguments = Array(arguments.dropFirst())
             subcommands[index].call(forArguments: subarguments,
-                                    options: options,
                                     context: context,
                                     parentCommands: parentCommands + [self])
 
         } else {
-            guard !options.help.wasSet else {
+            guard !context.options.help.wasSet else {
                 context.ui.printInformation("Usage:")
                 let parentCommandString = parentCommands
                     .map {$0.command}
@@ -57,7 +55,7 @@ extension Command {
                 context.done()
                 return
             }
-            execute(arguments: arguments, options: options, context: context)
+            execute(arguments: arguments, context: context)
         }
     }
 

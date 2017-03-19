@@ -21,7 +21,7 @@ struct ListIssuesCommand: Command {
                          map: {_ in return nil as String?}),
         ]
 
-    func execute(arguments: [String], options:CommandLineOptions, context: CommandContext) {
+    func execute(arguments: [String], context: CommandContext) {
 
         guard let project = parse(arguments: arguments) ?? context.project else {
             context.ui.printError("Project not specified")
@@ -33,7 +33,7 @@ struct ListIssuesCommand: Command {
 
         handlePagedResult(
             context: context,
-            onLoad: { getIssues(forProject: project, options: options, context: context, page: $0)},
+            onLoad: { getIssues(forProject: project, context: context, page: $0)},
             onPage: { self.processPageOfIssues(issues: $0, context: context)},
             onDone: { context.done() },
             onError: { error in

@@ -17,7 +17,7 @@ struct StartTrackingCommand: Command {
                          map: {$0[0].value() as String?}),
         ]
 
-    func execute(arguments: [String], options: CommandLineOptions, context: CommandContext) {
+    func execute(arguments: [String], context: CommandContext) {
 
 
         guard let issue = parse(arguments: arguments) ?? context.issue else {

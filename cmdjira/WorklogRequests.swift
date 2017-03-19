@@ -8,14 +8,14 @@
 
 import Foundation
 
-func getWorklogRequest(forProject projectID: String, dateSpan: DateSpan, options: CommandLineOptions, context: CommandContext) -> Promise<Result<JSON>> {
+func getWorklogRequest(forProject projectID: String, dateSpan: DateSpan, context: CommandContext) -> Promise<Result<JSON>> {
     let from = dateSpan.from.yyyyMMdd
     let to = dateSpan.to.yyyyMMdd
 
     do {
         return defaultHTTPGetter(request: try request(forURL: urlFor(path: "/tempo-timesheets/3/worklogs/?dateFrom=\(from)&dateTo=\(to)"),
                                                       context: context),
-                                 options: options)
+                                 options: context.options)
     } catch {
         let promise = Promise<Result<JSON>>()
         promise.callAsync(.failure(error))
@@ -23,7 +23,7 @@ func getWorklogRequest(forProject projectID: String, dateSpan: DateSpan, options
     }
 }
 
-func addWorklogRequest(forIssue issue: String, date: Date, timeSpent: TimeInterval, options: CommandLineOptions, context: CommandContext) -> Promise<Result<JSON>> {
+func addWorklogRequest(forIssue issue: String, date: Date, timeSpent: TimeInterval, context: CommandContext) -> Promise<Result<JSON>> {
 
     guard let username = context.user?.name else {
         context.ui.printError("User name not specified")
@@ -43,7 +43,7 @@ func addWorklogRequest(forIssue issue: String, date: Date, timeSpent: TimeInterv
         let req = try postRequest(forURL: urlFor(path: "/tempo-timesheets/3/worklogs"),
                                   json: json,
                                   context: context)
-        return defaultHTTPGetter(request: req, options: options)
+        return defaultHTTPGetter(request: req, options: context.options)
     } catch {
 
         let promise = Promise<Result<JSON>>()

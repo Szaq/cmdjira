@@ -9,10 +9,10 @@
 import Foundation
 
 
-func getMyselfRequest(options: CommandLineOptions, context: CommandContext) -> Promise<Result<JSON>> {
+func getMyselfRequest(context: CommandContext) -> Promise<Result<JSON>> {
     do {
         return defaultHTTPGetter(request: try request(forURL: urlFor(path: "/api/2/myself"), context: context),
-                                 options: options)
+                                 options: context.options)
     } catch {
         let promise = Promise<Result<JSON>>()
         promise.callAsync(.failure(error))

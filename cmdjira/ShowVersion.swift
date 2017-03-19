@@ -19,7 +19,7 @@ struct VersionCommand: Command {
         ]
 
 
-    func execute(arguments: [String], options: CommandLineOptions, context: CommandContext) {
+    func execute(arguments: [String], context: CommandContext) {
         print ("Version \(version)")
         context.done()
     }

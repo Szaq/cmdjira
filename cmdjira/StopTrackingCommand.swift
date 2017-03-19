@@ -18,7 +18,7 @@ struct StopTrackingCommand: Command {
                          map: {_ in nil as String?}),
         ]
 
-    func execute(arguments: [String], options: CommandLineOptions, context: CommandContext) {
+    func execute(arguments: [String], context: CommandContext) {
         let tracking = Tracking()
 
         switch tracking.status {
@@ -35,7 +35,7 @@ struct StopTrackingCommand: Command {
 
             Tracking(status: .idle).save()
 
-            if options.cancel.wasSet {
+            if context.options.cancel.wasSet {
                 context.ui.printSuccess("OK. Canceled upload")
                 context.done()
                 return
@@ -47,7 +47,6 @@ struct StopTrackingCommand: Command {
             addWorklogRequest(forIssue: issueKey,
                               date: Date(),
                               timeSpent: trackedSeconds,
-                              options: options,
                               context: context)
             .then{ result in
 
@@ -58,7 +57,7 @@ struct StopTrackingCommand: Command {
 
                     let worklog = Worklog(json: value)
 
-                    if !options.displayRaw.wasSet {
+                    if !context.options.displayRaw.wasSet {
                         let date = worklog.date?.pretty ?? ""
                         let issue = worklog.issueKey ?? ""
                         let timeSpent = "\(worklog.timeSpent / 3600)h"

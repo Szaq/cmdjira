@@ -8,10 +8,10 @@
 
 import Foundation
 
-func getCommentsRequest(issueID: String, options: CommandLineOptions, context: CommandContext, page: Page = Page.default) -> Promise<Result<ResultsPage<Comment>>> {
+func getCommentsRequest(issueID: String, context: CommandContext, page: Page = Page.default) -> Promise<Result<ResultsPage<Comment>>> {
     do {
         return defaultHTTPGetter(request: try request(forURL: urlFor(path: "/api/2/issue/\(issueID)/comment?startAt=\(page.startAt)&maxResults=\(page.maxResults)"), context: context),
-                                 options: options)
+                                 options: context.options)
             .then { result in
                 switch result {
                 case .failure(let error):

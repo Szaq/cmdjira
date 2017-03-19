@@ -58,9 +58,7 @@ class CommandExecuter {
 
         let subarguments = Array(cli.unparsedArguments.dropFirst())
         //Subarguments accept wrong number of arguments
-        command.call(forArguments: subarguments,
-                     options: options,
-                     context: commandContext)
+        command.call(forArguments: subarguments, context: commandContext)
     }
 
     private func showCompletion() {

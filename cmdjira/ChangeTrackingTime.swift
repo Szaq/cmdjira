@@ -16,7 +16,7 @@ struct ChangeTrackingTime: Command {
                          description: "Add or remove time from current tracking session.",
                          map: { return $0[0].value() as TimeInterval? }),
         ]
-    func execute(arguments: [String], options: CommandLineOptions, context: CommandContext) {
+    func execute(arguments: [String], context: CommandContext) {
 
 
         guard let timeChange = parse(arguments: arguments) as TimeInterval? else {

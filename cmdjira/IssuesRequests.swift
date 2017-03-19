@@ -33,14 +33,14 @@ func searchIssues(query: String,
     }
 }
 
-func getIssues(forProject projectID: String, options: CommandLineOptions, context: CommandContext, page: Page = Page.default) -> Promise<Result<ResultsPage<Issue>>> {
-    return searchIssues(query: "project=\(projectID)", options: options, context: context, page: page)
+func getIssues(forProject projectID: String, context: CommandContext, page: Page = Page.default) -> Promise<Result<ResultsPage<Issue>>> {
+    return searchIssues(query: "project=\(projectID)", options: context.options, context: context, page: page)
 }
 
-func getIssueRequest(issueID: String, options: CommandLineOptions, context: CommandContext) -> Promise<Result<JSON>> {
+func getIssueRequest(issueID: String, context: CommandContext) -> Promise<Result<JSON>> {
     do {
         return defaultHTTPGetter(request: try request(forURL: urlFor(path: "/api/2/issue/\(issueID)"), context: context),
-                                 options: options)
+                                 options: context.options)
     } catch {
         let promise = Promise<Result<JSON>>()
         promise.callAsync(.failure(error))

@@ -19,7 +19,7 @@ struct ShowTrackingStatusCommand: Command {
                          map: {_ in ()}),
         ]
 
-    func execute(arguments: [String], options: CommandLineOptions, context: CommandContext) {
+    func execute(arguments: [String], context: CommandContext) {
 
         if context.options.showBashPrompt.wasSet {
             context.ui.printInformation("To show tracking info in BASH promp. Add this code to ~/.bash_profile:")

@@ -23,7 +23,7 @@ struct ShowCommentsCommand: Command {
                          map: {_ in return nil as String?}),
         ]
 
-    func execute(arguments: [String], options:CommandLineOptions, context: CommandContext) {
+    func execute(arguments: [String], context: CommandContext) {
 
 
         guard let issue = parse(arguments: arguments) ?? context.issue else {
@@ -35,7 +35,7 @@ struct ShowCommentsCommand: Command {
         context.ui.startActivityIndicator()
 
         handlePagedResult(context: context,
-                          onLoad: { getCommentsRequest(issueID: issue, options: options, context: context, page: $0) },
+                          onLoad: { getCommentsRequest(issueID: issue, context: context, page: $0) },
                           onPage: { self.processPageOfComments(comments: $0, context: context) },
                           onDone: { context.done() },
                           onError: { context.ui.printError("Failed to list comments.", error: $0) })

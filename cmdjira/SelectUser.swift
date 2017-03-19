@@ -18,7 +18,7 @@ struct SelectUserCommand: Command {
                          map: {return $0[0].value() as String?})
     ]
 
-    func execute(arguments: [String], options:CommandLineOptions, context: CommandContext) {
+    func execute(arguments: [String], context: CommandContext) {
 
         guard let username = parse(arguments: arguments) as String? else {
             context.ui.printError("Username not provided")

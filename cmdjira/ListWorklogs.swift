@@ -35,7 +35,7 @@ struct ListWorklogsCommand: Command {
                          map: {values -> DateSpan? in return values[0].value()}),
     ]
 
-    func execute(arguments: [String], options:CommandLineOptions, context: CommandContext) {
+    func execute(arguments: [String], context: CommandContext) {
 
         guard let project = context.project else {
             context.ui.printError("Project not specified")
@@ -47,7 +47,7 @@ struct ListWorklogsCommand: Command {
 
         context.ui.startActivityIndicator()
 
-        getWorklogRequest(forProject: project, dateSpan: dateSpan, options: options, context: context)
+        getWorklogRequest(forProject: project, dateSpan: dateSpan, context: context)
             .then { result in
 
                 context.ui.stopActivityIndicator()
@@ -55,7 +55,7 @@ struct ListWorklogsCommand: Command {
                 switch result {
                 case .success(let worklogsJSON):
 
-                    if !options.displayRaw.wasSet {
+                    if !context.options.displayRaw.wasSet {
                         let worklogs = worklogsJSON.arrayValue.map {Worklog(json: $0)}
 
                         let sum = worklogs.reduce(0.0) {$0 + $1.timeSpent}
@@ -65,7 +65,7 @@ struct ListWorklogsCommand: Command {
                                                            "\($0.timeSpent / 3600)h"]}
                         context.ui.printTable(rows: worklogsTable)
 
-                        if !options.hideSummary.wasSet && !options.displayRaw.wasSet {
+                        if !context.options.hideSummary.wasSet && !context.options.displayRaw.wasSet {
                             context.ui.printInformation("----------------------\nSum: \(sum / 3600)")
                         }
 

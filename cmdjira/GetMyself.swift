@@ -18,11 +18,11 @@ struct MyselfCommand: Command {
                          map: {_ in ()}),
     ]
 
-    func execute(arguments: [String], options:CommandLineOptions, context: CommandContext) {
+    func execute(arguments: [String], context: CommandContext) {
 
         context.ui.startActivityIndicator()
 
-        getMyselfRequest(options: options, context: context)
+        getMyselfRequest(context: context)
             .then { result in
 
                 context.ui.stopActivityIndicator()

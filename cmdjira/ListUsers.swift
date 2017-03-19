@@ -19,7 +19,7 @@ struct ListUsersCommand: Command {
         ]
 
 
-    func execute(arguments: [String], options:CommandLineOptions, context: CommandContext) {
+    func execute(arguments: [String], context: CommandContext) {
         let users = Users()
         let usersTable = users.users.map {user in [user.username == users.currentUsername ? "*" : " ",
                                            user.username,

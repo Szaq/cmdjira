@@ -18,11 +18,11 @@ struct ListProjectsCommand: Command {
                          map: {_ in ()}),
         ]
 
-    func execute(arguments: [String], options:CommandLineOptions, context: CommandContext) {
+    func execute(arguments: [String], context: CommandContext) {
 
         context.ui.startActivityIndicator()
 
-        getProjectsRequest(options: options, context: context)
+        getProjectsRequest(options: context.options, context: context)
             .then { result in
 
                 context.ui.stopActivityIndicator()
@@ -35,7 +35,7 @@ struct ListProjectsCommand: Command {
 
                     ProjectsCache(projects: projects.map {$0.key}).save()
 
-                    if !options.displayRaw.wasSet {
+                    if !context.options.displayRaw.wasSet {
                         let projectsTable = projects.map {[$0.key, $0.name]}
                         context.ui.printTable(rows: projectsTable)
 

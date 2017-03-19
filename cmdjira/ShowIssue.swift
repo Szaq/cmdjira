@@ -21,7 +21,7 @@ struct ShowIssueCommand: Command {
                          map: {_ in return nil as String?}),
     ]
 
-    func execute(arguments: [String], options:CommandLineOptions, context: CommandContext) {
+    func execute(arguments: [String], context: CommandContext) {
 
 
         guard let issue = parse(arguments: arguments) ?? context.issue else {
@@ -32,14 +32,14 @@ struct ShowIssueCommand: Command {
 
         context.ui.startActivityIndicator()
 
-        getIssueRequest(issueID: issue, options: options, context: context)
+        getIssueRequest(issueID: issue, context: context)
             .then { result in
 
                 context.ui.stopActivityIndicator()
 
                 let issue = result.value.map {Issue(json: $0)}
 
-                if let issue = issue, !options.displayRaw.wasSet {
+                if let issue = issue, !context.options.displayRaw.wasSet {
 
                     let assigne = issue.assignee.map {" [\($0)]"} ?? ""
                     print("\(issue.key) \(issue.status)\(assigne): \(issue.summary)")

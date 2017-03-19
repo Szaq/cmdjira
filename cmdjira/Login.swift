@@ -24,7 +24,7 @@ struct LoginCommand: Command {
             map: {return ParsedArguments(username: $0[0].value(), password: $0[1].value(), baseURL: $0[2].value())})
     ]
 
-    func execute(arguments: [String], options:CommandLineOptions, context: CommandContext) {
+    func execute(arguments: [String], context: CommandContext) {
 
 
         guard
@@ -44,7 +44,7 @@ struct LoginCommand: Command {
 
         context.ui.startActivityIndicator()
 
-        getMyselfRequest(options: options, context: currentContext)
+        getMyselfRequest(context: currentContext)
             .then { result -> Void in
 
                 context.ui.stopActivityIndicator()

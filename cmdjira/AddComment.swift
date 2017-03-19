@@ -29,7 +29,7 @@ struct AddCommentCommand: Command {
 
     ]
 
-    func execute(arguments: [String], options: CommandLineOptions, context: CommandContext) {
+    func execute(arguments: [String], context: CommandContext) {
         guard
         let parsedArguments = parse(arguments: arguments) as ParsedArguments?,
         let issue = parsedArguments.issue ?? context.issue

@@ -32,7 +32,7 @@ struct AddWorklogCommand: Command {
                          map: {return ParsedArguments(timeSpent: $0[2].value(), date: $0[0].value(), issueID: $0[1].value())}),
         ]
 
-    func execute(arguments: [String], options:CommandLineOptions, context: CommandContext) {
+    func execute(arguments: [String], context: CommandContext) {
 
         let parsedArguments: ParsedArguments? = parse(arguments: arguments)
 
@@ -50,7 +50,6 @@ struct AddWorklogCommand: Command {
         addWorklogRequest(forIssue: issue,
                           date: parsedArguments?.date ?? Date(),
                           timeSpent: timeSpent,
-                          options: options,
                           context: context)
             .then { result in
 
@@ -60,7 +59,7 @@ struct AddWorklogCommand: Command {
                 case .success(let worklogJSON):
                     let worklog = Worklog(json: worklogJSON)
 
-                    if !options.displayRaw.wasSet {
+                    if !context.options.displayRaw.wasSet {
                         let date = worklog.date?.pretty ?? ""
                         let issue = worklog.issueKey ?? ""
                         let timeSpent = "\(worklog.timeSpent / 3600)h"
