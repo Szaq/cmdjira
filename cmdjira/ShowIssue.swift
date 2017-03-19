@@ -30,8 +30,13 @@ struct ShowIssueCommand: Command {
             return
         }
 
+        context.ui.startActivityIndicator()
+
         getIssueRequest(issueID: issue, options: options, context: context)
             .then { result in
+
+                context.ui.stopActivityIndicator()
+
                 let issue = result.value.map {Issue(json: $0)}
 
                 if let issue = issue, !options.displayRaw.wasSet {

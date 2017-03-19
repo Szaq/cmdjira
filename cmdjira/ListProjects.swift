@@ -20,8 +20,13 @@ struct ListProjectsCommand: Command {
 
     func execute(arguments: [String], options:CommandLineOptions, context: CommandContext) {
 
+        context.ui.startActivityIndicator()
+
         getProjectsRequest(options: options, context: context)
             .then { result in
+
+                context.ui.stopActivityIndicator()
+
                 switch result {
                 case .success(let value):
                     guard

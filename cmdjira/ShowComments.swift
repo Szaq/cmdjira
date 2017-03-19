@@ -32,6 +32,8 @@ struct ShowCommentsCommand: Command {
             return
         }
 
+        context.ui.startActivityIndicator()
+
         handlePagedResult(context: context,
                           onLoad: { getCommentsRequest(issueID: issue, options: options, context: context, page: $0) },
                           onPage: { self.processPageOfComments(comments: $0, context: context) },
@@ -41,6 +43,9 @@ struct ShowCommentsCommand: Command {
     }
 
     func processPageOfComments(comments: [Comment], context: CommandContext) {
+
+        context.ui.stopActivityIndicator()
+
         if !context.options.displayRaw.wasSet {
             let commentsTable = comments.map {[$0.updated?.pretty.bold.color(.darkGray) ?? "--",
                                                $0.author.bold.color(.blue),

@@ -45,8 +45,13 @@ struct ListWorklogsCommand: Command {
 
         let dateSpan = parse(arguments: arguments) ?? DateSpan.thisWeek
 
+        context.ui.startActivityIndicator()
+
         getWorklogRequest(forProject: project, dateSpan: dateSpan, options: options, context: context)
             .then { result in
+
+                context.ui.stopActivityIndicator()
+
                 switch result {
                 case .success(let worklogsJSON):
 

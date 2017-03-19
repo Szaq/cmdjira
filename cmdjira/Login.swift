@@ -42,8 +42,12 @@ struct LoginCommand: Command {
         var currentContext = context
         currentContext.user = User(username: username, password: password, baseURL: baseURL)
 
+        context.ui.startActivityIndicator()
+
         getMyselfRequest(options: options, context: currentContext)
             .then { result -> Void in
+
+                context.ui.stopActivityIndicator()
 
                 guard
                     let myself = result.value,

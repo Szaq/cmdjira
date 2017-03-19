@@ -20,8 +20,12 @@ struct MyselfCommand: Command {
 
     func execute(arguments: [String], options:CommandLineOptions, context: CommandContext) {
 
+        context.ui.startActivityIndicator()
+
         getMyselfRequest(options: options, context: context)
             .then { result in
+
+                context.ui.stopActivityIndicator()
 
                 switch result {
                 case .success(let myselfJSON):

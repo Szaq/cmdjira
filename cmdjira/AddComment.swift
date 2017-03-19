@@ -41,8 +41,13 @@ struct AddCommentCommand: Command {
 
         let text = context.ui.prompt(label: "Comment text:", multiline: context.options.multiline.wasSet)
 
+        context.ui.startActivityIndicator()
+
         addCommentRequest(issue: issue, text: text, context: context)
             .then { result in
+
+                context.ui.stopActivityIndicator()
+
                 switch result {
                 case .success(let json):
                     if context.options.displayRaw.wasSet {

@@ -51,6 +51,7 @@ struct CommandLineOptions {
     let showBashPrompt = BoolOption(longFlag: "show-bash-prompt-setter", required: false, helpMessage: "Show code that needs to be added to ~/.bash_profile in order to display tracking info in BASH promp.")
     let showZshPrompt = BoolOption(longFlag: "show-zsh-prompt-setter", required: false, helpMessage: "Show code that needs to be added to ~/.zshrc in order to display tracking info in ZSH prompt.")
     let multiline = BoolOption(longFlag: "multiline", required: false, helpMessage: "Text input expects multiple lines followed by line containing single word END.")
+    let disableSpinner = BoolOption(longFlag: "disable-activity-spinner", required: false, helpMessage: "Disable activity spinner.")
 
 
     func option(_ option: CommandLineOption) -> Option {
@@ -82,7 +83,8 @@ struct CommandLineOptions {
                 formatPrompt,
                 showBashPrompt,
                 showZshPrompt,
-                multiline]
+                multiline,
+                disableSpinner]
     }
 }
 

@@ -45,6 +45,7 @@ struct AddWorklogCommand: Command {
                 return
         }
 
+        context.ui.startActivityIndicator()
 
         addWorklogRequest(forIssue: issue,
                           date: parsedArguments?.date ?? Date(),
@@ -52,6 +53,8 @@ struct AddWorklogCommand: Command {
                           options: options,
                           context: context)
             .then { result in
+
+                context.ui.stopActivityIndicator()
 
                 switch result {
                 case .success(let worklogJSON):

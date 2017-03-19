@@ -29,6 +29,8 @@ struct ListIssuesCommand: Command {
             return
         }
 
+        context.ui.startActivityIndicator()
+
         handlePagedResult(
             context: context,
             onLoad: { getIssues(forProject: project, options: options, context: context, page: $0)},
@@ -41,6 +43,8 @@ struct ListIssuesCommand: Command {
     }
 
     func processPageOfIssues(issues: [Issue], context: CommandContext) {
+
+        context.ui.stopActivityIndicator()
 
         IssuesCache(issues:  issues.map{$0.key}).save()
 

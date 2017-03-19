@@ -41,6 +41,8 @@ struct StopTrackingCommand: Command {
                 return
             }
 
+            context.ui.startActivityIndicator()
+
             let trackedSeconds = (Date().timeIntervalSince1970 - tracking.date.timeIntervalSince1970) + tracking.timeChange
             addWorklogRequest(forIssue: issueKey,
                               date: Date(),
@@ -48,6 +50,8 @@ struct StopTrackingCommand: Command {
                               options: options,
                               context: context)
             .then{ result in
+
+                context.ui.stopActivityIndicator()
 
                 switch result {
                 case .success(let value):
