@@ -21,6 +21,9 @@ enum CommandLineOption {
     case showBashPrompt
     case showZshPrompt
     case multiline
+    case component
+    case assignee
+    case status
 
     static var all: [CommandLineOption] = [
         projectID,
@@ -34,7 +37,10 @@ enum CommandLineOption {
         formatPrompt,
         showBashPrompt,
         showZshPrompt,
-        multiline
+        multiline,
+        component,
+        assignee,
+        status
     ]
 }
 
@@ -52,6 +58,9 @@ struct CommandLineOptions {
     let showZshPrompt = BoolOption(longFlag: "show-zsh-prompt-setter", required: false, helpMessage: "Show code that needs to be added to ~/.zshrc in order to display tracking info in ZSH prompt.")
     let multiline = BoolOption(longFlag: "multiline", required: false, helpMessage: "Text input expects multiple lines followed by line containing single word END.")
     let disableSpinner = BoolOption(longFlag: "disable-activity-spinner", required: false, helpMessage: "Disable activity spinner.")
+    let component = StringOption(longFlag: "component", required: false, helpMessage: "Only search for components of specified type.")
+    let assignee = StringOption(longFlag: "assignee", required: false, helpMessage: "Only search for issues assigned to someone.")
+    let status = StringOption(longFlag: "status", required: false, helpMessage: "Only search for issues with specified status")
 
 
     func option(_ option: CommandLineOption) -> Option {
@@ -68,6 +77,9 @@ struct CommandLineOptions {
         case .showBashPrompt: return showBashPrompt
         case .showZshPrompt: return showZshPrompt
         case .multiline: return multiline
+        case .component: return component
+        case .assignee: return assignee
+        case .status: return status
         }
     }
 
@@ -84,7 +96,10 @@ struct CommandLineOptions {
                 showBashPrompt,
                 showZshPrompt,
                 multiline,
-                disableSpinner]
+                disableSpinner,
+                component,
+                assignee,
+                status]
     }
 }
 

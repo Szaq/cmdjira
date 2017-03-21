@@ -13,6 +13,8 @@ struct ListIssuesCommand: Command {
     let command = "issues"
     var subcommands: [Command] = [SearchIssuesCommand()]
 
+    var options: Set<CommandLineOption> = [.component, .assignee, .status]
+
     var argumentVariants: [ArgumentsVariantType] = [
         ArgumentsVariant(arguments: [ProjectParser("ProjectKey")],
                          description: "List issues in specfied project.",
