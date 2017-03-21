@@ -46,3 +46,29 @@ func getIssueRequest(issueID: String, context: CommandContext) -> Promise<Result
         return promise
     }
 }
+
+
+func assign(issue: String, toUserWithNick nickOrMe: String, context: CommandContext) -> Promise<Result<JSON>> {
+
+    guard let nick = nickOrMe == "me" ? context.user?.name : nickOrMe else {
+        context.ui.printError("User name not specified")
+        let promise = Promise<Result<JSON>>()
+        promise.callAsync(.failure(CmdJIRAErrors.unauthorized("User name not specified")))
+        return promise
+    }
+
+    let json: JSON = ["name" : nick]
+
+    do {
+        let req = try putRequest(forURL: urlFor(path: "/api/2/issue/\(issue)/assignee"),
+                                  json: json,
+                                  context: context)
+        return defaultHTTPGetter(request: req, options: context.options)
+    } catch {
+
+        let promise = Promise<Result<JSON>>()
+        promise.callAsync(.failure(error))
+        return promise
+    }
+}
+

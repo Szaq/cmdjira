@@ -11,6 +11,8 @@ import Foundation
 struct ShowIssueCommand: Command {
 
     let command = "issue"
+
+    var subcommands: [Command] = [AssignIssueCommand()]
     
     var argumentVariants: [ArgumentsVariantType] = [
         ArgumentsVariant(arguments: [IssueParser("IssueKey")],

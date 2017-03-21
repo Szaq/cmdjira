@@ -78,3 +78,17 @@ func postRequest(forURL url: String, json: JSON, context: CommandContext) throws
     req.httpBody = try json.rawData()
     return req
 }
+
+func putRequest(forURL url: String, body: Data, context: CommandContext) throws -> URLRequest {
+    var req = try request(forURL: url, context: context)
+    req.httpMethod = "PUT"
+    req.httpBody = body
+    return req
+}
+
+func putRequest(forURL url: String, json: JSON, context: CommandContext) throws -> URLRequest {
+    var req = try request(forURL: url, context: context)
+    req.httpMethod = "PUT"
+    req.httpBody = try json.rawData()
+    return req
+}

@@ -22,6 +22,9 @@
 		206FF71B1E7D8F450063A775 /* WorklogRequests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 206FF71A1E7D8F450063A775 /* WorklogRequests.swift */; };
 		206FF71D1E7D8F600063A775 /* CommentsRequests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 206FF71C1E7D8F600063A775 /* CommentsRequests.swift */; };
 		206FF71F1E7EE4DD0063A775 /* SearchIssues.swift in Sources */ = {isa = PBXBuildFile; fileRef = 206FF71E1E7EE4DD0063A775 /* SearchIssues.swift */; };
+		206FF7711E812D310063A775 /* NickParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 206FF7701E812D310063A775 /* NickParser.swift */; };
+		206FF7731E812DC00063A775 /* UserNicksCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 206FF7721E812DC00063A775 /* UserNicksCache.swift */; };
+		206FF7751E812EED0063A775 /* AssignIssue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 206FF7741E812EED0063A775 /* AssignIssue.swift */; };
 		2071A9631E77363400B40444 /* Date+FormatingAndParsing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2071A9621E77363400B40444 /* Date+FormatingAndParsing.swift */; };
 		2071A9651E773A5A00B40444 /* AddWorklog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2071A9641E773A5A00B40444 /* AddWorklog.swift */; };
 		2071A9671E774A7E00B40444 /* GetMyself.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2071A9661E774A7E00B40444 /* GetMyself.swift */; };
@@ -108,6 +111,9 @@
 		206FF71A1E7D8F450063A775 /* WorklogRequests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorklogRequests.swift; sourceTree = "<group>"; };
 		206FF71C1E7D8F600063A775 /* CommentsRequests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentsRequests.swift; sourceTree = "<group>"; };
 		206FF71E1E7EE4DD0063A775 /* SearchIssues.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchIssues.swift; sourceTree = "<group>"; };
+		206FF7701E812D310063A775 /* NickParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NickParser.swift; sourceTree = "<group>"; };
+		206FF7721E812DC00063A775 /* UserNicksCache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserNicksCache.swift; sourceTree = "<group>"; };
+		206FF7741E812EED0063A775 /* AssignIssue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AssignIssue.swift; sourceTree = "<group>"; };
 		2071A9621E77363400B40444 /* Date+FormatingAndParsing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Date+FormatingAndParsing.swift"; sourceTree = "<group>"; };
 		2071A9641E773A5A00B40444 /* AddWorklog.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddWorklog.swift; sourceTree = "<group>"; };
 		2071A9661E774A7E00B40444 /* GetMyself.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetMyself.swift; sourceTree = "<group>"; };
@@ -288,6 +294,7 @@
 				20CBB93C1E752CA000284540 /* ShowIssue.swift */,
 				20CBB9491E75535F00284540 /* ListIssues.swift */,
 				206FF71E1E7EE4DD0063A775 /* SearchIssues.swift */,
+				206FF7741E812EED0063A775 /* AssignIssue.swift */,
 			);
 			name = Issues;
 			sourceTree = "<group>";
@@ -323,6 +330,7 @@
 				2071A99A1E79AD4C00B40444 /* DateCompletionProvider.swift */,
 				2071A99C1E79AD7800B40444 /* DateSpanCompletionProvider.swift */,
 				2071A99E1E79ADA900B40444 /* ProjectsCache.swift */,
+				206FF7721E812DC00063A775 /* UserNicksCache.swift */,
 			);
 			name = CompletionProviders;
 			sourceTree = "<group>";
@@ -338,6 +346,7 @@
 				20DF97261E79EE3800A01DB8 /* DateSpanParser.swift */,
 				20DF97281E7A91B400A01DB8 /* UsernameParser.swift */,
 				20DF972A1E7A978B00A01DB8 /* StringParser.swift */,
+				206FF7701E812D310063A775 /* NickParser.swift */,
 			);
 			name = ArgumentParsers;
 			sourceTree = "<group>";
@@ -483,6 +492,7 @@
 				204D8EE81E73F64B001E07B2 /* CmdJIRAErrors.swift in Sources */,
 				206FF71D1E7D8F600063A775 /* CommentsRequests.swift in Sources */,
 				20CBB93A1E752B5A00284540 /* StringExtensions.swift in Sources */,
+				206FF7751E812EED0063A775 /* AssignIssue.swift in Sources */,
 				206FF7121E7D7D230063A775 /* AddComment.swift in Sources */,
 				208A00661E7C151B0065EDB6 /* ChangeTrackingTime.swift in Sources */,
 				2071A97A1E775EB100B40444 /* SelectUser.swift in Sources */,
@@ -517,12 +527,14 @@
 				20DF97291E7A91B400A01DB8 /* UsernameParser.swift in Sources */,
 				2071A96E1E77527E00B40444 /* KeychainSwiftAccessOptions.swift in Sources */,
 				2071A96C1E77524700B40444 /* KeychainSwift.swift in Sources */,
+				206FF7711E812D310063A775 /* NickParser.swift in Sources */,
 				204D8EE61E73F3F6001E07B2 /* Promise.swift in Sources */,
 				2071A9741E7755C000B40444 /* Login.swift in Sources */,
 				204D8EE41E7383B0001E07B2 /* Result.swift in Sources */,
 				20CBB9441E752F2F00284540 /* Provider.swift in Sources */,
 				2071A9981E79A0D800B40444 /* ArgumentCompletionProvider.swift in Sources */,
 				20DF971F1E79EDDD00A01DB8 /* DurationParser.swift in Sources */,
+				206FF7731E812DC00063A775 /* UserNicksCache.swift in Sources */,
 				204D8ED61E737704001E07B2 /* main.swift in Sources */,
 				2071A9901E79574B00B40444 /* Tracking.swift in Sources */,
 				20CBB9511E755CC800284540 /* Date+StringInitialization.swift in Sources */,
