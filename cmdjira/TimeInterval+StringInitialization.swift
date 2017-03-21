@@ -32,9 +32,9 @@ extension TimeInterval {
             if values.count == 2,
                 let hours = Int(values[0]),
                 let minutes = Int(values[1]),
-                hours <= 24, minutes <= 60 {
+                abs(hours) <= 24, abs(minutes) <= 60 {
 
-                self = TimeInterval(hours * 3600 + minutes * 60)
+                self = TimeInterval(hours * 3600 + minutes * 60 * (hours < 0 ? -1 : 1))
 
             } else {
                 return nil

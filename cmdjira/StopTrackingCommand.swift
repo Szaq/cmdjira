@@ -68,7 +68,7 @@ struct StopTrackingCommand: Command {
                     }
 
                 case .failure(let error):
-                    context.ui.printError("Failed to add worklog", error: error)
+                    context.ui.printError("Failed to add \(trackedSeconds.prettyString) to \(issueKey)", error: error)
                 }
                 context.done()
                 }
