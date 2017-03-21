@@ -87,7 +87,8 @@ extension Command {
         }
 
         let subarguments = Array(cli.unparsedArguments.dropFirst())
-        return subcommand.subcommand(forArguments: subarguments)
+        let result = subcommand.subcommand(forArguments: subarguments) ?? subcommand
+        return result
     }
 
     func completionsFromSubtree(forArgumentIndex argumentIndex: Int, inArguments arguments: [String]) -> [String] {

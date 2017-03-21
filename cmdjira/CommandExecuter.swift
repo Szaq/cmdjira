@@ -105,8 +105,10 @@ class CommandExecuter {
     }
 
     private func subcommand(forArguments arguments: [String]) -> Command? {
-        guard let command = arguments.first else { return nil}
+        guard let commandName = arguments.first else { return nil}
 
-        return commands[command]?.subcommand(forArguments: Array(arguments.dropFirst()))
+        let command = commands[commandName]
+
+        return command?.subcommand(forArguments: Array(arguments.dropFirst())) ?? command
     }
 }
