@@ -12,7 +12,7 @@ struct ShowIssueCommand: Command {
 
     let command = "issue"
 
-    var subcommands: [Command] = [AssignIssueCommand()]
+    var subcommands: [Command] = [AssignIssueCommand(), SetIssueStatusCommand()]
     
     var argumentVariants: [ArgumentsVariantType] = [
         ArgumentsVariant(arguments: [IssueParser("IssueKey")],

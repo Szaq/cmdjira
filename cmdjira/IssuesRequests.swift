@@ -75,3 +75,30 @@ func assign(issue: String, toUserWithNick nickOrMe: String, context: CommandCont
     }
 }
 
+func getTransitions(issue: String, context: CommandContext) -> Promise<Result<JSON>> {
+    do {
+        return defaultHTTPGetter(request: try request(forURL: urlFor(path: "/api/2/issue/\(issue)/transitions"), context: context),
+                                 options: context.options)
+    } catch {
+        let promise = Promise<Result<JSON>>()
+        promise.callAsync(.failure(error))
+        return promise
+    }
+}
+
+func transition(issue: String, withTransitionID transitionID: String, context: CommandContext) -> Promise<Result<JSON>> {
+
+    let json: JSON = ["transition": [ "id": transitionID ]]
+    do {
+        let req = try postRequest(forURL: urlFor(path: "/api/2/issue/\(issue)/transitions"),
+                                  json: json,
+                                  context: context)
+        return defaultHTTPGetter(request: req, options: context.options)
+    } catch {
+
+        let promise = Promise<Result<JSON>>()
+        promise.callAsync(.failure(error))
+        return promise
+    }
+
+}
