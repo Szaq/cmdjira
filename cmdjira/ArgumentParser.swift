@@ -52,7 +52,7 @@ extension ArgumentParser {
 
 protocol ArgumentsVariantType {
     var arguments: [ArgumentParser] {get}
-    func description(forCommand: String) -> String
+    func descriptions() -> [String]
 
     func parse(_ arguments: [String]) -> Any?
     func completions(forArgumentIndex argumentIndex: Int, inArguments arguments: [String]) -> [String]
@@ -66,7 +66,7 @@ struct ArgumentsVariant<T>: ArgumentsVariantType {
 
     let map: ([ParsedValue]) -> T
 
-    func description(forCommand command: String) -> String {
+    func descriptions() -> [String] {
         let argumentsNames = arguments.map {"<\($0.name)>"}.joined(separator: " ")
 
 
@@ -76,7 +76,7 @@ struct ArgumentsVariant<T>: ArgumentsVariantType {
             .map {$0!}
             .joined(separator: " ")
 
-        return "\(command) \(argumentsNames) - \(description) \(argumentsDescriptions)"
+        return ["\(argumentsNames)", "- \(description) \(argumentsDescriptions)"]
     }
 
     func parse(_ arguments: [String]) -> Any? {

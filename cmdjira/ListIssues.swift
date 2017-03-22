@@ -55,7 +55,8 @@ struct ListIssuesCommand: Command {
 
         if !context.options.displayRaw.wasSet {
             let issuesTable = issues.map {[$0.key, $0.status, $0.assignee.map {" [\($0)]"} ?? "", $0.summary]}
-            context.ui.printTable(rows: issuesTable)
+            context.ui.printTable(rows: issuesTable,
+                                  flexibleCols: [3])
 
         } else {
             issues.forEach { issue in

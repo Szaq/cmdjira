@@ -14,7 +14,7 @@ protocol Command {
     var command: String {get}
     var argumentVariants: [ArgumentsVariantType] {get}
 
-    func helpString(forParentCommand: String) -> String
+    func helpStrings(forParentCommand: String) -> [[String]]
     func execute(arguments: [String], context: CommandContext)
 }
 
@@ -23,11 +23,12 @@ extension Command {
     var subcommands: [Command] {return []}
     var argumentVariants: [ArgumentsVariantType] { return []}
 
-    func helpString(forParentCommand parentCommand: String) -> String {
+    func helpStrings(forParentCommand parentCommand: String) -> [[String]] {
         let fullCommand = "\(parentCommand) \(command)"
-        return argumentVariants
-            .map {$0.description(forCommand: fullCommand)}
-            .joined(separator: "\n")
+
+        return [argumentVariants.map {[fullCommand] + $0.descriptions()},
+                subcommands.flatMap { $0.helpStrings(forParentCommand: fullCommand) }]
+            .flatMap {$0}
     }
 
     ///Calls this command or one of subcommands
@@ -60,10 +61,8 @@ extension Command {
     }
 
     func printUsage(parentCommand: String, context: CommandContext) {
-        context.ui.printInformation(helpString(forParentCommand: parentCommand))
-        subcommands.forEach { subcommand in
-            subcommand.printUsage(parentCommand: "\(parentCommand) \(command)", context: context)
-        }
+        context.ui.printTable(rows: helpStrings(forParentCommand: parentCommand),
+                              flexibleCols: [2])
     }
 
     func completions(forArgumentIndex argumentIndex: Int, inArguments arguments: [String]) -> [String] {

@@ -91,22 +91,66 @@ class UI {
         return lines.joined(separator: "\n")
     }
 
-    func printTable(rows: [[String]]) {
+    func printTable(rows: [[String]], header: [String]? = nil, footer: [String]? = nil, flexibleCols: [Int] = []) {
+
+        let verticalSeparator = " "
+
         var maxColLengths: [Int] = []
-        for row in rows {
+
+        //Add header and footer
+        let formatedHeader = header.map {row in [row.map {$0.bold}]} ?? []
+        let formatedFooter = footer.map {row in [row.map {$0.bold}]} ?? []
+        let rowsWithHeaderAndFooter = formatedHeader + rows + formatedFooter
+
+        //Compute cols width
+        for row in rowsWithHeaderAndFooter {
             for (colIndex, col) in row.enumerated() {
 
                 if colIndex >= maxColLengths.count {
                     maxColLengths.append(0)
                 }
 
-                maxColLengths[colIndex] = max(col.utf8.count,maxColLengths[colIndex])
+                let strippedANSICol = col.replacingOccurrences(of: "\u{001B}\\[[0-9,\\;]*m", with: "",
+                                                               options: String.CompareOptions.regularExpression,
+                                                               range: Range(uncheckedBounds: (col.startIndex, upper: col.endIndex)))
+
+                maxColLengths[colIndex] = max(strippedANSICol.utf8.count, maxColLengths[colIndex])
             }
         }
 
-        for row in rows {
+        //Compensate for too-long flexible column. Pick sensible width if in doubt
+        var terminalSize = winsize()
+        let _ = ioctl(0, TIOCGWINSZ, &terminalSize)
+        let terminalWidth = terminalSize.ws_col > 0 ? terminalSize.ws_col : 999
+        let tableWidth = maxColLengths.reduce(0, +)
+        let separatorsWidth = verticalSeparator.characters.count * (maxColLengths.count - 1)
+
+        if tableWidth + separatorsWidth > Int(terminalWidth) {
+            let flexibleWidth = flexibleCols.reduce(0, {$0 + maxColLengths[$1]})
+            let nonFlexibleWidth = tableWidth - flexibleWidth
+            let availableSpaceForFlexible = Int(terminalWidth) - nonFlexibleWidth - separatorsWidth
+            flexibleCols.forEach {
+                maxColLengths[$0] = maxColLengths[$0] * availableSpaceForFlexible / flexibleWidth
+            }
+        }
+
+        //Split too long columns
+        let splittedRows = rowsWithHeaderAndFooter.flatMap {row -> [[String]] in
+            let splittedCols = row.enumerated().map { $1.split(atWidth: maxColLengths[$0]) }
+            let rowsCount = splittedCols.reduce(0, {max($0, $1.count)})
+            return (0 ..< rowsCount).map { rowIndex -> [String] in
+                return splittedCols.map {$0.count > rowIndex ? $0[rowIndex] : ""}
+            }
+        }
+
+        //Draw
+        for row in splittedRows {
             for (colIndex, col) in row.enumerated() {
-                print(col.padded(toWidth: maxColLengths[colIndex]), terminator: " ")
+                let strippedANSICol = col.replacingOccurrences(of: "\u{001B}\\[[0-9,\\;]*m", with: "",
+                                                               options: String.CompareOptions.regularExpression,
+                                                               range: Range(uncheckedBounds: (col.startIndex, upper: col.endIndex)))
+                let padWidth = maxColLengths[colIndex] - strippedANSICol.characters.count
+                print(col.padded(by: padWidth), terminator: verticalSeparator)
             }
             print("")
         }

@@ -63,11 +63,11 @@ struct ListWorklogsCommand: Command {
                         let worklogsTable = worklogs.map {[$0.date?.pretty ?? "",
                                                            $0.issueKey ?? "",
                                                            "\($0.timeSpent / 3600)h"]}
-                        context.ui.printTable(rows: worklogsTable)
 
-                        if !context.options.hideSummary.wasSet && !context.options.displayRaw.wasSet {
-                            context.ui.printInformation("----------------------\nSum: \(sum / 3600)")
-                        }
+
+                        let shouldDisplayFooter = !context.options.hideSummary.wasSet && !context.options.displayRaw.wasSet
+                        let footer:[String]? = shouldDisplayFooter ? ["Sum","","\(sum / 3600)"] : nil
+                        context.ui.printTable(rows: worklogsTable, header:["Date", "Issue", "Time"], footer: footer)
 
                     } else {
                         context.ui.printRaw("\(worklogsJSON)")
