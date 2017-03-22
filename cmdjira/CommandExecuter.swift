@@ -51,7 +51,7 @@ class CommandExecuter {
                 commandContext.ui.printInformation("cmdjira version \(version)")
                 let commandsList = commands.keys.joined(separator: ", ")
                 commandContext.ui.printInformation("Valid commands: \(commandsList)")
-                cli.printUsage()
+                cli.printUsage(options: self.availableOptions(forArguments: cli.unparsedArguments))
                 commandContext.ui.printInformation("Add 'complete -C \"cmdjira complete\" cmdjira' to your ~/.bash_profile or  ~/.zshrc to get automcompletion")
                 exit(EX_USAGE)
         }

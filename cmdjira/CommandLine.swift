@@ -403,14 +403,14 @@ public class CommandLine {
      *
      * - parameter to: An OutputStreamType to write the error message to.
      */
-    public func printUsage<TargetStream: TextOutputStream>(_ to: inout TargetStream) {
+    public func printUsage<TargetStream: TextOutputStream>(_ to: inout TargetStream, options: [Option]? = nil) {
         /* Nil coalescing operator (??) doesn't work on closures :( */
         let format = formatOutput != nil ? formatOutput! : defaultFormat
         
         let name = _arguments[0]
         print(format("Usage: \(name) [options]", .about), terminator: "", to: &to)
         
-        for opt in _options {
+        for opt in options ?? _options {
             print(format(opt.flagDescription, .optionFlag), terminator: "", to: &to)
             print(format(opt.helpMessage, .optionHelp), terminator: "", to: &to)
         }
@@ -443,8 +443,8 @@ public class CommandLine {
     /**
      * Prints a usage message.
      */
-    public func printUsage() {
+    public func printUsage(options: [Option]? = nil) {
         var out = StderrOutputStream.stream
-        printUsage(&out)
+        printUsage(&out, options: options)
     }
 }
