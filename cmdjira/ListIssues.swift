@@ -50,6 +50,8 @@ struct ListIssuesCommand: Command {
         context.ui.stopActivityIndicator()
 
         IssuesCache(issues:  issues.map{$0.key}).save()
+        let components = issues.flatMap {$0.components}.flatMap {$0}.unique()
+        IssueComponentsCache(components: components).save()
 
         if !context.options.displayRaw.wasSet {
             let issuesTable = issues.map {[$0.key, $0.status, $0.assignee.map {" [\($0)]"} ?? "", $0.summary]}

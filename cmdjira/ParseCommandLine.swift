@@ -83,6 +83,19 @@ struct CommandLineOptions {
         }
     }
 
+    func parser(_ option: CommandLineOption) -> ArgumentParser? {
+        switch option {
+        case .projectID: return ProjectParser("ProjectID")
+        case .issueID: return IssueParser("IssueID")
+        case .user: return UsernameParser("UserName")
+        case .component: return IssueComponentParser("Component")
+        case .assignee: return NickParser("User")
+        case .status: return IssueStatusParser("Status")
+        default:
+            return nil
+        }
+    }
+
     var all: [Option] {
         return [projectID,
                 issueID,

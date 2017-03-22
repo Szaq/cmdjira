@@ -76,7 +76,7 @@ class CommandExecuter {
         let wordAtPoint = wordIndex < words.count ? words[wordIndex] : "INVALID"
 
         if wordAtPoint.hasPrefix("-") {
-            let availableOptions = self.availableOptions(forArguments: cli.unparsedArguments)
+            let availableOptions: [Option] = self.availableOptions(forArguments: cli.unparsedArguments)
 
             return availableOptions.forEach {
                 if let longFlag = $0.longFlag {
@@ -90,19 +90,40 @@ class CommandExecuter {
             return
         }
 
+        let wordAtPreviousPoint = ((wordIndex - 1) < words.count && (wordIndex - 1) >= 0) ? words[wordIndex - 1] : "INVALID"
+
+        let availableOptions: [CommandLineOption] = self.availableOptions(forArguments: cli.unparsedArguments)
+
+        if let indexOfOption = availableOptions.index(where: {
+            let option = options.option($0)
+
+            let isLongOptionSame = option.longFlag.map { "--\($0)" == wordAtPreviousPoint } ?? false
+            let isShortOptionSame = option.shortFlag.map { "-\($0)" == wordAtPreviousPoint } ?? false
+
+            return isLongOptionSame || isShortOptionSame
+        }),
+            let parser = options.parser(availableOptions[indexOfOption]) {
+            parser.completions.forEach {print($0)}
+        }
+        
         if let currentCommand = cli.unparsedArguments.first.flatMap({commands[$0]}) {
             let subarguments = Array(cli.unparsedArguments.dropFirst())
-            currentCommand.completionsFromSubtree(forArgumentIndex: wordIndex - 1, inArguments: subarguments)
+            currentCommand
+                .completionsFromSubtree(forArgumentIndex: wordIndex - 1, inArguments: subarguments)
                 .forEach {print($0)}
         } else {
             commands.keys.forEach {print($0)}
         }
     }
 
-    private func availableOptions(forArguments arguments: [String]) -> [Option] {
-        let availableOptions = globalOptions.union(subcommand(forArguments: arguments)?.options ?? [])
-        return availableOptions.map {options.option($0)}
+    private func availableOptions(forArguments arguments: [String]) -> [CommandLineOption] {
+        return Array(globalOptions.union(subcommand(forArguments: arguments)?.options ?? []))
     }
+
+    private func availableOptions(forArguments arguments: [String]) -> [Option] {
+        return availableOptions(forArguments: arguments).map {options.option($0)}
+    }
+
 
     private func subcommand(forArguments arguments: [String]) -> Command? {
         guard let commandName = arguments.first else { return nil}

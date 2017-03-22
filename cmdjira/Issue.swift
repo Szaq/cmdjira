@@ -30,6 +30,10 @@ struct Issue {
     var assignee: String? {
         return json["fields"]["assignee"]["displayName"].stringValue
     }
+
+    var components: [String]? {
+        return json["fields"]["components"].array?.flatMap {$0["name"].string}
+    }
 }
 
 extension Issue: JSONDecodable {
