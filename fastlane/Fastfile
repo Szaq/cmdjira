@@ -17,7 +17,7 @@ default_platform :mac
 
 platform :mac do
   before_all do
-    # ENV["SLACK_URL"] = "https://hooks.slack.com/services/..."
+    ENV["SLACK_URL"] = ENV["CMDJIRA_SLACK_URL"]
     
     
   end
@@ -43,6 +43,10 @@ platform :mac do
     )
 
     sh "rm -R ../build"
+
+    slack(
+       message: "New version available: #{version}. Description:\n#{description} "
+     )
   end
 
   # You can define as many lanes as you want
