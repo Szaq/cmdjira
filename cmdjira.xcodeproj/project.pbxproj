@@ -67,6 +67,7 @@
 		208A00271E7AD6800065EDB6 /* ANSIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 208A00261E7AD6800065EDB6 /* ANSIColor.swift */; };
 		208A00661E7C151B0065EDB6 /* ChangeTrackingTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 208A00651E7C151B0065EDB6 /* ChangeTrackingTime.swift */; };
 		208A00681E7C178F0065EDB6 /* TimeInterval+Print.swift in Sources */ = {isa = PBXBuildFile; fileRef = 208A00671E7C178F0065EDB6 /* TimeInterval+Print.swift */; };
+		20C9F2611E841A1900271451 /* NSRange+Contains.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20C9F2601E841A1900271451 /* NSRange+Contains.swift */; };
 		20CBB9381E752B4100284540 /* Option.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20CBB9371E752B4100284540 /* Option.swift */; };
 		20CBB93A1E752B5A00284540 /* StringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20CBB9391E752B5A00284540 /* StringExtensions.swift */; };
 		20CBB93D1E752CA000284540 /* ShowIssue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20CBB93C1E752CA000284540 /* ShowIssue.swift */; };
@@ -164,6 +165,7 @@
 		208A00261E7AD6800065EDB6 /* ANSIColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ANSIColor.swift; sourceTree = "<group>"; };
 		208A00651E7C151B0065EDB6 /* ChangeTrackingTime.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChangeTrackingTime.swift; sourceTree = "<group>"; };
 		208A00671E7C178F0065EDB6 /* TimeInterval+Print.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "TimeInterval+Print.swift"; sourceTree = "<group>"; };
+		20C9F2601E841A1900271451 /* NSRange+Contains.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSRange+Contains.swift"; sourceTree = "<group>"; };
 		20CBB9371E752B4100284540 /* Option.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Option.swift; sourceTree = "<group>"; };
 		20CBB9391E752B5A00284540 /* StringExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringExtensions.swift; sourceTree = "<group>"; };
 		20CBB93C1E752CA000284540 /* ShowIssue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShowIssue.swift; sourceTree = "<group>"; };
@@ -426,6 +428,7 @@
 				208A00671E7C178F0065EDB6 /* TimeInterval+Print.swift */,
 				205CA0341E82EF98002E4E3B /* Array+Unique.swift */,
 				205CA0361E831F1A002E4E3B /* String+Padding.swift */,
+				20C9F2601E841A1900271451 /* NSRange+Contains.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -538,6 +541,7 @@
 				20CBB94E1E755C2500284540 /* Comment.swift in Sources */,
 				20DF97211E79EDF600A01DB8 /* DateParser.swift in Sources */,
 				2071A9671E774A7E00B40444 /* GetMyself.swift in Sources */,
+				20C9F2611E841A1900271451 /* NSRange+Contains.swift in Sources */,
 				2071A98E1E79312900B40444 /* ShowTrackingStatus.swift in Sources */,
 				2071A9831E78032A00B40444 /* Version.swift in Sources */,
 				20DF972B1E7A978B00A01DB8 /* StringParser.swift in Sources */,

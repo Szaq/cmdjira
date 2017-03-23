@@ -21,5 +21,4 @@ struct DateSpanParser: ArgumentParser {
     func parse(_ argument: String) -> ParsedValue? {
         return DateSpan.parse(commandLineArgs: [argument])
     }
-
 }

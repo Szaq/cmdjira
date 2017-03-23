@@ -43,8 +43,33 @@ struct ShowIssueCommand: Command {
 
                 if let issue = issue, !context.options.displayRaw.wasSet {
 
-                    let assigne = issue.assignee.map {" [\($0)]"} ?? ""
-                    print("\(issue.key) \(issue.status)\(assigne): \(issue.summary)")
+                    let rows: [[String]?] = [
+                        ["Status", issue.status],
+                        issue.assignee.map {["Assignee", $0]},
+                        issue.type.map {["Type", $0]},
+                        issue.priority.map {["Priority", $0]},
+                        issue.duedate.map {["Due date", $0.pretty]},
+                        issue.components.flatMap {$0.count > 0 ?["Components", $0.joined(separator: ", ")] : nil},
+                        issue.labels.flatMap {$0.count > 0 ? ["Labels", $0.joined(separator: ", ")] : nil},
+                        issue.project.map {["Project", "\($0) <\(issue.projectURL ?? String())>"]},
+                        issue.timeSpent.map {["Time Spent", TimeInterval($0).prettyString]},
+                        issue.updated.map {["Updated", $0.pretty]},
+                        issue.reporter.map {["Reporter", $0]},
+                        issue.url.map {["URL", $0]},
+                        ]
+
+
+                    context.ui.printInformation("\(issue.key.bold): \(issue.summary)\n")
+
+                    context.ui.printTable(rows: rows.flatMap {$0})
+                    context.ui.printInformation("\nDescription:\n".bold)
+                    context.ui.printInformation(issue.description)
+                    context.ui.printInformation("\nLast Comments:\n".bold)
+                    let commentsTable = issue.comments?.map {[$0.updated?.pretty.bold.color(.darkGray) ?? "--",
+                                                       $0.author.bold.color(.blue),
+                                                       $0.body]} ?? []
+                    context.ui.printTable(rows: commentsTable)
+
                 } else {
                     context.ui.printRaw("\(result)")
                 }
