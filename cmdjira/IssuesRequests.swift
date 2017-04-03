@@ -36,7 +36,8 @@ func getIssues(forProject projectID: String, context: CommandContext, page: Page
     let componentPart = context.options.component.wasSet ? " AND component=\(context.options.component.value ?? String())" : ""
     let assigneePart = context.options.assignee.wasSet ? " AND assignee=\(context.options.assignee.value ?? String())" : ""
     let statusPart = context.options.status.wasSet ? " AND status=\"\(context.options.status.value ?? String())\"" : ""
-    return searchIssues(query: "project=\(projectID)\(componentPart)\(assigneePart)\(statusPart)", context: context, page: page)
+    let textPart = context.options.text.wasSet ? " AND text ~ \"\(context.options.text.value ?? String())\"" : ""
+    return searchIssues(query: "project=\(projectID)\(componentPart)\(assigneePart)\(statusPart)\(textPart)", context: context, page: page)
 }
 
 func getIssueRequest(issueID: String, context: CommandContext) -> Promise<Result<JSON>> {

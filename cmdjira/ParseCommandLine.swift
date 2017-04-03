@@ -24,6 +24,8 @@ enum CommandLineOption {
     case component
     case assignee
     case status
+    case interactive
+    case text
 
     static var all: [CommandLineOption] = [
         projectID,
@@ -40,7 +42,9 @@ enum CommandLineOption {
         multiline,
         component,
         assignee,
-        status
+        status,
+        interactive,
+        text
     ]
 }
 
@@ -61,7 +65,8 @@ struct CommandLineOptions {
     let component = StringOption(longFlag: "component", required: false, helpMessage: "Only search for components of specified type.")
     let assignee = StringOption(longFlag: "assignee", required: false, helpMessage: "Only search for issues assigned to someone.")
     let status = StringOption(longFlag: "status", required: false, helpMessage: "Only search for issues with specified status")
-
+    let interactive = BoolOption(longFlag: "interactive", required: false, helpMessage: "Tracking should run in interactive mode. Tracking inactivity time and computer sleep.")
+    let text = StringOption(longFlag: "text", required: false, helpMessage: "Only search for issues containing this text")
 
     func option(_ option: CommandLineOption) -> Option {
         switch option {
@@ -80,6 +85,8 @@ struct CommandLineOptions {
         case .component: return component
         case .assignee: return assignee
         case .status: return status
+        case .interactive: return interactive
+        case .text: return text
         }
     }
 
@@ -112,7 +119,9 @@ struct CommandLineOptions {
                 disableSpinner,
                 component,
                 assignee,
-                status]
+                status,
+                interactive,
+                text]
     }
 }
 
